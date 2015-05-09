@@ -1,7 +1,23 @@
 <div id="tree" style=" background-color: #fff;"></div>
 	<script src="scripts/ttip.js"></script>
 	<script src="scripts/tree.js"></script>
-  <button ng-click="loadTree(treeData)">loadTree</button>  
+  <div id="optionsModal" class="modal fade">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Modal title</h4>
+      </div>
+      <div class="modal-body">
+        <button type="button" class="btn btn-md btn-primary" data-dismiss="modal" data-toggle="modal" data-target="#nodeModal">Add</button>
+        <button type="button" class="btn btn-md btn-primary" data-dismiss="modal" data-toggle="modal" data-target="#editNodeModal">Edit</button>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
   <div id="nodeModal" class="modal fade">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -13,17 +29,29 @@
         <form id="myForm" method="post">
           <div class="input-group">
             <label>Title</label>
-            <input type="text" class="form-control" placeholder="Title" aria-describedby="basic-addon1" autofocus="">
+            <input type="text" ng-model="node.title" class="form-control" placeholder="Title" aria-describedby="basic-addon1" autofocus="">
           </div>
 
           <div class="input-group">
             <label>Description</label>
-            <input type="text" class="form-control" placeholder="Description" aria-describedby="basic-addon2">
+            <input type="text" ng-model="node.description" class="form-control" placeholder="Description" aria-describedby="basic-addon2">
           </div>
 
           <div class="input-group">
             <label>Assigned to</label>
-            <input type="text" class="form-control" placeholder="AssignedTo" aria-describedby="basic-addon2">
+            <input type="text" ng-model="node.assignedTo" class="form-control" placeholder="AssignedTo" aria-describedby="basic-addon2">
+          </div>
+
+          <div class="input-group">
+            <label>Status</label><br>
+            <span class="input-group-addon">
+            <input type="radio" ng-model="node.status" name="status" value="b" aria-label="Blocked">
+            <label>Blocked</label>
+            <input type="radio" ng-model="node.status" name="status" value="p" aria-label="InProgress">
+            <label>InProgress</label>
+            <input type="radio" ng-model="node.status" name="status" value="c" aria-label="Completed">
+            <label>Completed</label>
+          </span>
           </div>
 
           </div>
@@ -31,8 +59,54 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="button" class="btn btn-primary" ng-click="createNode(node)">Save changes</button>
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<div id="editNodeModal" class="modal fade">
+<div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <h4 class="modal-title">Modal title</h4>
+    </div>
+    <div class="modal-body">
+      <form id="myForm" method="post">
+        <div class="input-group">
+          <label>Title</label>
+          <input type="text" ng-model="node.title" class="form-control" placeholder="Title" aria-describedby="basic-addon1" autofocus="">
+        </div>
+
+        <div class="input-group">
+          <label>Description</label>
+          <input type="text" ng-model="node.description" class="form-control" placeholder="Description" aria-describedby="basic-addon2">
+        </div>
+
+        <div class="input-group">
+          <label>Assigned to</label>
+          <input type="text" ng-model="node.assignedTo" class="form-control" placeholder="AssignedTo" aria-describedby="basic-addon2">
+        </div>
+
+        <div class="input-group">
+          <label>Status</label><br>
+          <span class="input-group-addon">
+          <input type="radio" ng-model="node.status" name="status" value="b" aria-label="Blocked">
+          <label>Blocked</label>
+          <input type="radio" ng-model="node.status" name="status" value="p" aria-label="InProgress">
+          <label>InProgress</label>
+          <input type="radio" ng-model="node.status" name="status" value="c" aria-label="Completed">
+          <label>Completed</label>
+        </span>
+        </div>
+
+        </div>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      <button type="button" class="btn btn-primary" ng-click="editNode(node)">Save changes</button>
+    </div>
+  </div><!-- /.modal-content -->
+</div><!-- /.modal-dialog -->
 </div><!-- /.modal -->

@@ -8,63 +8,118 @@
  * Controller of the sos00App
  */
 angular.module('sos00App')
-  .controller('TreeCtrl', function ($scope) {
-    $scope.treeData = [
-      {
-        "name": "Top Level",
-        "parent": "null",
-      "blocked": false,
-        "children": [
-          {
-            "name": "Level 2: A",
-            "parent": "Top Level",
+  .controller('TreeCtrl', function ($scope, $timeout) {
+
+    $scope.node = {};
+
+    $scope.createNode = function(newNode){
+      $('#nodeModal').modal('hide')
+      console.log(newNode);
+      $scope.treeData = [
+        {
+          "name": "Top Level",
+          "parent": "null",
         "blocked": false,
-            "children": [
-              {
-                "name": "Son of A",
-                "parent": "Level 2: A",
-          "blocked": false,
           "children": [
-          {
-            "name": "Son son of A",
-            "parent": "Son of A",
-            "blocked": true
-          },
-          {
-            "name": "Son son of A",
-            "parent": "Son of A",
-            "blocked": false
-          }
-          ]
-          },
-              {
-                "name": "Daughter of A",
-                "parent": "Level 2: A",
-          "blocked": true
-              }
+            {
+              "name": "Level 2: A",
+              "parent": "Top Level",
+          "blocked": false,
+              "children": [
+                {
+                  "name": "Son of A",
+                  "parent": "Level 2: A",
+            "blocked": false,
+            "children": [
+            {
+              "name": "Son son of A",
+              "parent": "Son of A",
+              "blocked": true
+            },
+            {
+              "name": "Son son of A",
+              "parent": "Son of A",
+              "blocked": false
+            }
             ]
-          },
+            },
+                {
+                  "name": "Daughter of A",
+                  "parent": "Level 2: A",
+            "blocked": true
+                }
+              ]
+            },
+            {
+              "name": "Level 2: B",
+              "parent": "Top Level",
+          "blocked": false
+            },
           {
-            "name": "Level 2: B",
-            "parent": "Top Level",
-        "blocked": true
-          },
+              "name": "Level 2: B",
+              "parent": "Top Level",
+          "blocked": false
+        },
         {
             "name": "Level 2: B",
             "parent": "Top Level",
-        "blocked": true
-      },
-      {
-          "name": "Level 2: B",
-          "parent": "Top Level",
-      "blocked": false
+        "blocked": false
+          }
+          ]
         }
-        ]
-      }
-    ];
+      ];
+      $scope.loadTree($scope.treeData);
+    };
+
+    $scope.editNode = function(newNode){
+      $('#editNodeModal').modal('hide')
+      console.log(newNode);
+      $scope.treeData = [
+        {
+          "name": "Top Level",
+          "parent": "null",
+        "blocked": false,
+          "children": [
+            {
+              "name": "Level 2: A",
+              "parent": "Top Level",
+          "blocked": false,
+              "children": [
+                {
+                  "name": "Son of A",
+                  "parent": "Level 2: A",
+            "blocked": false
+            },
+                {
+                  "name": "Daughter of A",
+                  "parent": "Level 2: A",
+            "blocked": true
+                }
+              ]
+            },
+            {
+              "name": "Level 2: B",
+              "parent": "Top Level",
+          "blocked": false
+            },
+          {
+              "name": "Level 2: B",
+              "parent": "Top Level",
+          "blocked": false
+        },
+        {
+            "name": "Level 2: B",
+            "parent": "Top Level",
+        "blocked": false
+          }
+          ]
+        }
+      ];
+      $scope.loadTree($scope.treeData);
+    };
 
     $scope.loadTree = function(treeData){
-
+      $("#tree").empty();
       // ************** Generate the tree diagram	 *****************
       var margin = {top: 100, right: 10, bottom: 10, left: 10},
       	width = 1000 - margin.right - margin.left,
@@ -78,7 +133,6 @@ angular.module('sos00App')
       var diagonal = d3.svg.diagonal()
       	.projection(function(d) { return [d.x, d.y]; });
 
-        $("#tree").empty();
       var svg = d3.select("#tree").append("svg")
       	.attr("width", width + margin.right + margin.left)
       	.attr("height", height + margin.top + margin.bottom)
@@ -124,7 +178,8 @@ angular.module('sos00App')
       	  .style("fill", function(d){if(d.blocked) return "#FF3333"; else return "#3385FF";})
       	  .on("click", function(d){
       		// alert("Clicked");
-          $('#nodeModal').modal('show')
+            $scope.node.id = d.name;
+            $('#optionsModal').modal('show');
       	   })
       	  .on('mouseover', tip.show)
       	  .on('mouseout', tip.hide);
@@ -149,4 +204,62 @@ angular.module('sos00App')
       }
 
     }
+
+    $timeout(function(){
+      $scope.treeData = [
+        {
+          "name": "Top Level",
+          "parent": "null",
+        "blocked": false,
+          "children": [
+            {
+              "name": "Level 2: A",
+              "parent": "Top Level",
+          "blocked": false,
+              "children": [
+                {
+                  "name": "Son of A",
+                  "parent": "Level 2: A",
+            "blocked": false,
+            "children": [
+            {
+              "name": "Son son of A",
+              "parent": "Son of A",
+              "blocked": true
+            },
+            {
+              "name": "Son son of A",
+              "parent": "Son of A",
+              "blocked": false
+            }
+            ]
+            },
+                {
+                  "name": "Daughter of A",
+                  "parent": "Level 2: A",
+            "blocked": true
+                }
+              ]
+            },
+            {
+              "name": "Level 2: B",
+              "parent": "Top Level",
+          "blocked": true
+            },
+          {
+              "name": "Level 2: B",
+              "parent": "Top Level",
+          "blocked": true
+        },
+        {
+            "name": "Level 2: B",
+            "parent": "Top Level",
+        "blocked": false
+          }
+          ]
+        }
+      ];
+      $scope.loadTree($scope.treeData);
+    }, 10);
+
   });

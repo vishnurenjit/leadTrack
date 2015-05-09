@@ -16,10 +16,4 @@ angular.module('sos00App').controller('MainCtrl', function ($scope, $location) {
         $location.path('/login');
     };
 
-
-
-
-
-
-
   });
