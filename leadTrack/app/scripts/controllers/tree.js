@@ -17,58 +17,68 @@ angular.module('sos00App')
       console.log(newNode);
       $scope.treeData = [
         {
-          "name": "Top Level",
+          "title": "Top Level",
           "parent": "null",
+          "description": "Top Level description",
         "blocked": false,
           "children": [
             {
-              "name": "Level 2: A",
+              "title": "Level 2: A",
               "parent": "Top Level",
+              "description": "Level 2: A description",
           "blocked": false,
               "children": [
                 {
-                  "name": "Son of A",
+                  "title": "Son of A",
                   "parent": "Level 2: A",
+                  "description": "Son of A: A description",
             "blocked": false,
             "children": [
             {
-              "name": "Son son of A",
+              "title": "Son son of A",
               "parent": "Son of A",
+              "description": "Son of son of A A description",
               "blocked": true
             },
             {
-              "name": "Son son of A",
+              "title": "Son son of A",
               "parent": "Son of A",
+              "description": "Son of Son of A: A description",
               "blocked": false
             }
             ]
             },
                 {
-                  "name": "Daughter of A",
+                  "title": "Daughter of A",
                   "parent": "Level 2: A",
-            "blocked": true
+                  "description": "Dau of A: A description",
+            "blocked": false
                 }
               ]
             },
             {
-              "name": "Level 2: B",
+              "title": "Level 2: B",
               "parent": "Top Level",
+              "description": "Level 2: B description",
           "blocked": false
             },
           {
-              "name": "Level 2: B",
+              "title": "Level 2: B",
               "parent": "Top Level",
+              "description": "Level 2: B description",
           "blocked": false
         },
         {
-            "name": "Level 2: B",
+            "title": "Level 2: B",
             "parent": "Top Level",
+            "description": "Level 2: B description",
         "blocked": false
           }
           ]
         }
       ];
       $scope.loadTree($scope.treeData);
+      $scope.node = {};
     };
 
     $scope.editNode = function(newNode){
@@ -142,9 +152,9 @@ angular.module('sos00App')
       tip = d3.tip().attr('class', 'd3-tip')
       	.offset([-10, 0])
       	.html(function(d) {
-      		return "<strong>Name:</strong> <span style='color:#FF3333'>" + d.name + "</span><br>" +
-      				"<strong>Name:</strong> <span style='color:#FF3333'>sadasdkandkahdkahdkakdakdhkahdkahdkahdkakdhakhdkahdkadkahdkah</span><br>" +
-      				"<strong>Name:</strong> <span style='color:#FF3333'>" + d.name + "</span><br>";
+      		return "<strong>Name:</strong> <span style='color:#7A995C'>" + d.title + "</span><br>" +
+      				"<strong>Name:</strong> <span style='color:#7A995C'>"+ d.description +"</span><br>" +
+      				"<strong>Name:</strong> <span style='color:#7A995C'>" + d.status + "</span><br>";
       	});
 
       /* Invoke the tip in the context of your visualization */
@@ -175,11 +185,12 @@ angular.module('sos00App')
 
         nodeEnter.append("circle")
       	  .attr("r", 20)
-      	  .style("fill", function(d){if(d.blocked) return "#FF3333"; else return "#3385FF";})
+      	  .style("fill", function(d){if(d.blocked) return "#FF3333"; else return "#006B24";})
       	  .on("click", function(d){
       		// alert("Clicked");
-            $scope.node.id = d.name;
+            $scope.node = d;
             $('#optionsModal').modal('show');
+            $scope.$apply();
       	   })
       	  .on('mouseover', tip.show)
       	  .on('mouseout', tip.hide);
@@ -189,7 +200,7 @@ angular.module('sos00App')
       		  return d.children || d._children ? -28 : 28; })
       	  .attr("dy", ".35em")
       	  .attr("text-anchor", "middle")
-      	  .text(function(d) { return d.name; })
+      	  .text(function(d) { return d.title; })
       	  .style("fill-opacity", 1);
 
         // Declare the links…
@@ -208,52 +219,61 @@ angular.module('sos00App')
     $timeout(function(){
       $scope.treeData = [
         {
-          "name": "Top Level",
+          "title": "Top Level",
           "parent": "null",
+          "description": "Top Level description",
         "blocked": false,
           "children": [
             {
-              "name": "Level 2: A",
+              "title": "Level 2: A",
               "parent": "Top Level",
+              "description": "Level 2: A description",
           "blocked": false,
               "children": [
                 {
-                  "name": "Son of A",
+                  "title": "Son of A",
                   "parent": "Level 2: A",
+                  "description": "Son of A: A description",
             "blocked": false,
             "children": [
             {
-              "name": "Son son of A",
+              "title": "Son son of A",
               "parent": "Son of A",
+              "description": "Son of son of A A description",
               "blocked": true
             },
             {
-              "name": "Son son of A",
+              "title": "Son son of A",
               "parent": "Son of A",
+              "description": "Son of Son of A: A description",
               "blocked": false
             }
             ]
             },
                 {
-                  "name": "Daughter of A",
+                  "title": "Daughter of A",
                   "parent": "Level 2: A",
+                  "description": "Dau of A: A description",
             "blocked": true
                 }
               ]
             },
             {
-              "name": "Level 2: B",
+              "title": "Level 2: B",
               "parent": "Top Level",
+              "description": "Level 2: B description",
           "blocked": true
             },
           {
-              "name": "Level 2: B",
+              "title": "Level 2: B",
               "parent": "Top Level",
+              "description": "Level 2: B description",
           "blocked": true
         },
         {
-            "name": "Level 2: B",
+            "title": "Level 2: B",
             "parent": "Top Level",
+            "description": "Level 2: B description",
         "blocked": false
           }
           ]

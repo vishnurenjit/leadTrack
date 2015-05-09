@@ -6,7 +6,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title">Modal title</h4>
+        <h4 class="modal-title">Options</h4>
       </div>
       <div class="modal-body">
         <button type="button" class="btn btn-md btn-primary" data-dismiss="modal" data-toggle="modal" data-target="#nodeModal">Add</button>
@@ -23,7 +23,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title">Modal title</h4>
+        <h4 class="modal-title">Add node</h4>
       </div>
       <div class="modal-body">
         <form id="myForm" method="post">
@@ -36,11 +36,7 @@
             <label>Description</label>
             <input type="text" ng-model="node.description" class="form-control" placeholder="Description" aria-describedby="basic-addon2">
           </div>
-
-          <div class="input-group">
-            <label>Assigned to</label>
-            <input type="text" ng-model="node.assignedTo" class="form-control" placeholder="AssignedTo" aria-describedby="basic-addon2">
-          </div>
+        
 
           <div class="input-group">
             <label>Status</label><br>
@@ -69,7 +65,7 @@
   <div class="modal-content">
     <div class="modal-header">
       <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-      <h4 class="modal-title">Modal title</h4>
+      <h4 class="modal-title">Edit Node</h4>
     </div>
     <div class="modal-body">
       <form id="myForm" method="post">
@@ -81,11 +77,6 @@
         <div class="input-group">
           <label>Description</label>
           <input type="text" ng-model="node.description" class="form-control" placeholder="Description" aria-describedby="basic-addon2">
-        </div>
-
-        <div class="input-group">
-          <label>Assigned to</label>
-          <input type="text" ng-model="node.assignedTo" class="form-control" placeholder="AssignedTo" aria-describedby="basic-addon2">
         </div>
 
         <div class="input-group">
