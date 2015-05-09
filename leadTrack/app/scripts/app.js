@@ -31,6 +31,10 @@ angular
         templateUrl: 'views/about.html',
         controller: 'AboutCtrl'
       })
+      .when('/tree', {
+        templateUrl: 'views/tree.html',
+        controller: 'TreeCtrl'
+      })
       .otherwise({
         redirectTo: '/login'
       });
