@@ -22,10 +22,7 @@ angular.module('sos00App')
   		console.log(user.username + ' - ' + user.password);
   		Parse.User.logIn(('' + user.username).toLowerCase(), user.password, {
             success: function(user) {
-            	$rootScope.$apply(function() {
-  			        $location.path('/home');
-  			        console.log($location.path());
-  			      });
+              loadHome(user);
             },
             error: function(user, err) {
             	$scope.errorMessage = err.message;
@@ -48,11 +45,7 @@ angular.module('sos00App')
 
       user.signUp(null, {
           success: function(user) {
-            console.log("success");
-              $rootScope.$apply(function() {
-                $location.path('/home');
-                console.log($location.path());
-              });
+            loadHome(user);
           },
           error: function(user, error) {
               if (error.code === 125) {
@@ -71,5 +64,14 @@ angular.module('sos00App')
               $scope.$apply();
           }
       });
+
+      var loadHome = function(user) {
+        console.log("success");
+        $rootScope.user = user;
+        $rootScope.$apply(function() {
+          $location.path('/home');
+          console.log($location.path());
+        });
+      }
     }
   });
