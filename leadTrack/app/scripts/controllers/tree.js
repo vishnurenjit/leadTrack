@@ -21,29 +21,34 @@ angular.module('sos00App')
           "parent": "null",
           "description": "Top Level description",
         "blocked": false,
+        "status": "c",
           "children": [
             {
               "title": "Level 2: A",
               "parent": "Top Level",
               "description": "Level 2: A description",
+              "status": "c",
           "blocked": false,
               "children": [
                 {
                   "title": "Son of A",
                   "parent": "Level 2: A",
                   "description": "Son of A: A description",
+                  "status": "c",
             "blocked": false,
             "children": [
             {
               "title": "Son son of A",
               "parent": "Son of A",
               "description": "Son of son of A A description",
+              "status": "b",
               "blocked": true
             },
             {
               "title": "Son son of A",
               "parent": "Son of A",
               "description": "Son of Son of A: A description",
+              "status": "c",
               "blocked": false
             }
             ]
@@ -52,6 +57,7 @@ angular.module('sos00App')
                   "title": "Daughter of A",
                   "parent": "Level 2: A",
                   "description": "Dau of A: A description",
+                  "status": "p",
             "blocked": false
                 }
               ]
@@ -60,18 +66,21 @@ angular.module('sos00App')
               "title": "Level 2: B",
               "parent": "Top Level",
               "description": "Level 2: B description",
+              "status": "c",
           "blocked": false
             },
           {
               "title": "Level 2: B",
               "parent": "Top Level",
               "description": "Level 2: B description",
+              "status": "c",
           "blocked": false
         },
         {
             "title": "Level 2: B",
             "parent": "Top Level",
             "description": "Level 2: B description",
+            "status": "c",
         "blocked": false
           }
           ]
@@ -86,40 +95,70 @@ angular.module('sos00App')
       console.log(newNode);
       $scope.treeData = [
         {
-          "name": "Top Level",
+          "title": "Top Level",
           "parent": "null",
+          "description": "Top Level description",
         "blocked": false,
+        "status": "c",
           "children": [
             {
-              "name": "Level 2: A",
+              "title": "Level 2: A",
               "parent": "Top Level",
+              "description": "Level 2: A description",
+              "status": "c",
           "blocked": false,
               "children": [
                 {
-                  "name": "Son of A",
+                  "title": "Son of A",
                   "parent": "Level 2: A",
-            "blocked": false
+                  "description": "Son of A: A description",
+                  "status": "c",
+            "blocked": false,
+            "children": [
+            {
+              "title": "Son son of A",
+              "parent": "Son of A",
+              "description": "Son of son of A A description",
+              "status": "b",
+              "blocked": true
+            },
+            {
+              "title": "Son son of A",
+              "parent": "Son of A",
+              "description": "Son of Son of A: A description",
+              "status": "c",
+              "blocked": false
+            }
+            ]
             },
                 {
-                  "name": "Daughter of A",
+                  "title": "Daughter of A",
                   "parent": "Level 2: A",
-            "blocked": true
+                  "description": "Dau of A: A description",
+                  "status": "p",
+            "blocked": false
                 }
               ]
             },
             {
-              "name": "Level 2: B",
+              "title": "Level 2: B",
               "parent": "Top Level",
+              "description": "Level 2: B description",
+              "status": "p",
           "blocked": false
             },
           {
-              "name": "Level 2: B",
+              "title": "Level 2: B",
               "parent": "Top Level",
+              "description": "Level 2: B description",
+              "status": "p",
           "blocked": false
         },
         {
-            "name": "Level 2: B",
+            "title": "Level 2: B",
             "parent": "Top Level",
+            "description": "Level 2: B description",
+            "status": "c",
         "blocked": false
           }
           ]
@@ -152,10 +191,20 @@ angular.module('sos00App')
       tip = d3.tip().attr('class', 'd3-tip')
       	.offset([-10, 0])
       	.html(function(d) {
-      		return "<strong>Name:</strong> <span style='color:#7A995C'>" + d.title + "</span><br>" +
-      				"<strong>Name:</strong> <span style='color:#7A995C'>"+ d.description +"</span><br>" +
-      				"<strong>Name:</strong> <span style='color:#7A995C'>" + d.status + "</span><br>";
+      		return "<label>Name:</label> <span style='color:#7A995C'>" + d.title + "</span><br>" +
+      				"<label>Description:</label> <span style='color:#7A995C'>"+ d.description +"</span><br>" +
+      				"<label>Status:</label> <span style='color:#7A995C'>" + getStatus(d.status)+ "</span><br>";
       	});
+
+        var getStatus = function(status){
+          if(status === 'b'){
+            return "Blocked";
+          } else if(status=== 'p'){
+            return "In Progress";
+          } else if(status=== 'c'){
+            return "Completed";
+          }
+        }
 
       /* Invoke the tip in the context of your visualization */
       svg.call(tip);
@@ -185,7 +234,16 @@ angular.module('sos00App')
 
         nodeEnter.append("circle")
       	  .attr("r", 20)
-      	  .style("fill", function(d){if(d.blocked) return "#FF3333"; else return "#006B24";})
+      	  .style("fill", function(d){
+            if(d.status === 'b'){
+              return "#FF3333";
+            } else if(d.status=== 'p'){
+              return "#CC9900";
+            } else if(d.status=== 'c'){
+              return "#006B24";
+            }
+            }
+              )
       	  .on("click", function(d){
       		// alert("Clicked");
             $scope.node = d;
@@ -222,30 +280,35 @@ angular.module('sos00App')
           "title": "Top Level",
           "parent": "null",
           "description": "Top Level description",
+          "status": "c",
         "blocked": false,
           "children": [
             {
               "title": "Level 2: A",
               "parent": "Top Level",
               "description": "Level 2: A description",
+              "status": "c",
           "blocked": false,
               "children": [
                 {
                   "title": "Son of A",
                   "parent": "Level 2: A",
                   "description": "Son of A: A description",
+                  "status": "c",
             "blocked": false,
             "children": [
             {
               "title": "Son son of A",
               "parent": "Son of A",
               "description": "Son of son of A A description",
+              "status": "b",
               "blocked": true
             },
             {
               "title": "Son son of A",
               "parent": "Son of A",
               "description": "Son of Son of A: A description",
+              "status": "p",
               "blocked": false
             }
             ]
@@ -254,6 +317,7 @@ angular.module('sos00App')
                   "title": "Daughter of A",
                   "parent": "Level 2: A",
                   "description": "Dau of A: A description",
+                  "status": "b",
             "blocked": true
                 }
               ]
@@ -262,18 +326,21 @@ angular.module('sos00App')
               "title": "Level 2: B",
               "parent": "Top Level",
               "description": "Level 2: B description",
+              "status": "b",
           "blocked": true
             },
           {
               "title": "Level 2: B",
               "parent": "Top Level",
               "description": "Level 2: B description",
+              "status": "b",
           "blocked": true
         },
         {
             "title": "Level 2: B",
             "parent": "Top Level",
             "description": "Level 2: B description",
+            "status": "c",
         "blocked": false
           }
           ]
