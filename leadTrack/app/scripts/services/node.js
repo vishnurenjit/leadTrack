@@ -2,7 +2,19 @@
 
 angular.module('sos00App')
   .factory('NodeService', function () {
-  	var o = {};
+  	var o = {currentNode : null};
+
+  	
+  	o.setCurrentNode = function(node) {
+  		o.currentNode = node;
+  	}
+
+  	o.getCurrentNode = function(node) {
+  		return o.currentNode;
+  	}
+
+
+
   	var Node = Parse.Object.extend("Node");
 
   	o.createNode = function(label, description) {

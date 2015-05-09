@@ -22,7 +22,7 @@ angular.module('sos00App')
   		console.log(user.username + ' - ' + user.password);
   		Parse.User.logIn(('' + user.username).toLowerCase(), user.password, {
             success: function(user) {
-              loadHome(user);
+              $scope.loadHome(user);
             },
             error: function(user, err) {
             	$scope.errorMessage = err.message;
@@ -65,7 +65,7 @@ angular.module('sos00App')
           }
       });
 
-      var loadHome = function(user) {
+      $scope.loadHome = function(user) {
         console.log("success");
         $rootScope.user = user;
         $rootScope.$apply(function() {
