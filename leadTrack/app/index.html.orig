@@ -64,8 +64,13 @@
         <script src="scripts/controllers/about.js"></script>
         <script src="scripts/controllers/login.js"></script>
         <script src="scripts/services/constants.js"></script>
-        <script src="scripts/services/node.js"></script>
+<<<<<<< HEAD
+        <script src="scripts/services/role.js"></script>
+        <script src="scripts/services/organization.js"></script>
         <script src="scripts/controllers/tree.js"></script>
+=======
+        <script src="scripts/services/node.js"></script>
+>>>>>>> f3dc061661202a6f901147407b187d3e5b1741f0
         <!-- endbuild -->
 </body>
 </html>

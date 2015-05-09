@@ -39,7 +39,7 @@ angular
         redirectTo: '/login'
       });
   })
-  .run(function ($rootScope, $location) {
+  .run(function ($rootScope, $location, NodeService) {
         Parse.initialize("4NTmY9kDlg1evU00IQe52BEYTyt51c8LUS3LkQSX", "xaaVDMvy2Kw0IJv454jpwJxGiplFAHtuqWDDAqhz");
         var currentUser = Parse.User.current();
         $rootScope.user = null;

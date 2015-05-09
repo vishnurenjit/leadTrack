@@ -16,31 +16,8 @@ angular.module('sos00App').controller('MainCtrl', function ($scope, $location) {
         $location.path('/login');
     };
 
-    $scope.loadModal = function() {
-    	console.log("Add user clicked");    	
-    	$('#addUser').modal('show');
-    }
-
-    $scope.addUser = function() {
-      var user = $scope.user;
-    }
-
-    $scope.saveUser = function() {
-      var file = $('.fileinput').fileinput();
-      console.log(file);
-    };
-
-    var generatePassword = function() {
-      return "pass"
-    }
 
 
-
-
-  $scope.loadUser = function(index) { alert();
-    $scope.currentUser = $scope.friends[index];
-     
-  }
 
 
 
