@@ -3,6 +3,8 @@
 angular.module('sos00App')
   .factory('BoardService', function ($rootScope) {
   	var o = {};
+
+
   	var Board = Parse.Object.extend("Board");
 
   	o.createBoard = function() {
@@ -11,14 +13,14 @@ angular.module('sos00App')
   		return board;
   	}
 
-  	o.saveBoard = function(board, svSuccess, svError) {
+  	o.saveBoard = function(board, svSuccess) {
   		board.set("createdDate", new Date());
   		board.save(null, {
 		  success: function(board) {
 		  	svSuccess(board);
 		  },
 		  error: function(board, error) {
-		  	svError(board, error);
+		  	alert("error : " + error);
 		  }
 		});
   	}
