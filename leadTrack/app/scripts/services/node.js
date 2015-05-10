@@ -26,6 +26,7 @@ angular.module('sos00App')
   		var node = new Node();
   		node.set("label", label);
   		node.set("description", description);
+  		node.set("status", "p");
   		return node;
   	}
 
