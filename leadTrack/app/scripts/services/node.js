@@ -14,6 +14,8 @@ angular.module('sos00App')
       node.title = o.currentNode.get("label");
       node.description = o.currentNode.get("description");
       node.status = o.currentNode.get("status");
+      node.createdDate = o.currentNode.get("createdDate");
+      node.parent = o.currentNode.get("parent");
       node.children = [];
   		return node;
   	}
