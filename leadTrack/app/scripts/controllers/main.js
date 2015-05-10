@@ -33,7 +33,7 @@ angular.module('sos00App').controller('MainCtrl', function ($scope, $location, $
         $scope.boards.unshift({
           label: $scope.board.lable, createdOn : svBoard.get("createdDate"), description : $scope.board.description
         });
-        
+
       });
 
     }
@@ -43,7 +43,7 @@ angular.module('sos00App').controller('MainCtrl', function ($scope, $location, $
       NodeService.setCurrentNode(root);
       $location.path('/tree');
     }
-    
+
     BoardService.getBoards(function(boards) {
       for (var i = boards.length - 1; i >= 0; i--) {
         buidModal(boards[i], function(obj) {
@@ -53,7 +53,7 @@ angular.module('sos00App').controller('MainCtrl', function ($scope, $location, $
         });
       };
       //$rootScope.
-      
+
     })
 
 

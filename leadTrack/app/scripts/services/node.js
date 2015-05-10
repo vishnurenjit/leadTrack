@@ -4,13 +4,18 @@ angular.module('sos00App')
   .factory('NodeService', function () {
   	var o = {currentNode : null};
 
-  	
+
   	o.setCurrentNode = function(node) {
   		o.currentNode = node;
   	}
 
-  	o.getCurrentNode = function(node) {
-  		return o.currentNode;
+  	o.getCurrentNode = function() {
+      var node = {};
+      node.title = o.currentNode.get("label");
+      node.description = o.currentNode.get("description");
+      node.status = o.currentNode.get("status");
+      node.children = [];
+  		return node;
   	}
 
 

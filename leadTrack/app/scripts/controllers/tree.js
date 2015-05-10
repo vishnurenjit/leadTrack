@@ -8,7 +8,7 @@
  * Controller of the sos00App
  */
 angular.module('sos00App')
-  .controller('TreeCtrl', function ($scope, $timeout) {
+  .controller('TreeCtrl', function ($scope, $timeout, NodeService) {
 
     $scope.node = {};
 
@@ -275,77 +275,79 @@ angular.module('sos00App')
     }
 
     $timeout(function(){
-      $scope.treeData = [
-        {
-          "title": "Top Level",
-          "parent": "null",
-          "description": "Top Level description",
-          "status": "c",
-        "blocked": false,
-          "children": [
-            {
-              "title": "Level 2: A",
-              "parent": "Top Level",
-              "description": "Level 2: A description",
-              "status": "c",
-          "blocked": false,
-              "children": [
-                {
-                  "title": "Son of A",
-                  "parent": "Level 2: A",
-                  "description": "Son of A: A description",
-                  "status": "c",
-            "blocked": false,
-            "children": [
-            {
-              "title": "Son son of A",
-              "parent": "Son of A",
-              "description": "Son of son of A A description",
-              "status": "b",
-              "blocked": true
-            },
-            {
-              "title": "Son son of A",
-              "parent": "Son of A",
-              "description": "Son of Son of A: A description",
-              "status": "p",
-              "blocked": false
-            }
-            ]
-            },
-                {
-                  "title": "Daughter of A",
-                  "parent": "Level 2: A",
-                  "description": "Dau of A: A description",
-                  "status": "b",
-            "blocked": true
-                }
-              ]
-            },
-            {
-              "title": "Level 2: B",
-              "parent": "Top Level",
-              "description": "Level 2: B description",
-              "status": "b",
-          "blocked": true
-            },
-          {
-              "title": "Level 2: B",
-              "parent": "Top Level",
-              "description": "Level 2: B description",
-              "status": "b",
-          "blocked": true
-        },
-        {
-            "title": "Level 2: B",
-            "parent": "Top Level",
-            "description": "Level 2: B description",
-            "status": "c",
-        "blocked": false
-          }
-          ]
-        }
-      ];
+      console.log(NodeService.getCurrentNode());
+      $scope.treeData = [NodeService.getCurrentNode()];
+      // $scope.treeData = [
+      //   {
+      //     "title": "Top Level",
+      //     "parent": "null",
+      //     "description": "Top Level description",
+      //     "status": "c",
+      //   "blocked": false,
+      //     "children": [
+      //       {
+      //         "title": "Level 2: A",
+      //         "parent": "Top Level",
+      //         "description": "Level 2: A description",
+      //         "status": "c",
+      //     "blocked": false,
+      //         "children": [
+      //           {
+      //             "title": "Son of A",
+      //             "parent": "Level 2: A",
+      //             "description": "Son of A: A description",
+      //             "status": "c",
+      //       "blocked": false,
+      //       "children": [
+      //       {
+      //         "title": "Son son of A",
+      //         "parent": "Son of A",
+      //         "description": "Son of son of A A description",
+      //         "status": "b",
+      //         "blocked": true
+      //       },
+      //       {
+      //         "title": "Son son of A",
+      //         "parent": "Son of A",
+      //         "description": "Son of Son of A: A description",
+      //         "status": "p",
+      //         "blocked": false
+      //       }
+      //       ]
+      //       },
+      //           {
+      //             "title": "Daughter of A",
+      //             "parent": "Level 2: A",
+      //             "description": "Dau of A: A description",
+      //             "status": "b",
+      //       "blocked": true
+      //           }
+      //         ]
+      //       },
+      //       {
+      //         "title": "Level 2: B",
+      //         "parent": "Top Level",
+      //         "description": "Level 2: B description",
+      //         "status": "b",
+      //     "blocked": true
+      //       },
+      //     {
+      //         "title": "Level 2: B",
+      //         "parent": "Top Level",
+      //         "description": "Level 2: B description",
+      //         "status": "b",
+      //     "blocked": true
+      //   },
+      //   {
+      //       "title": "Level 2: B",
+      //       "parent": "Top Level",
+      //       "description": "Level 2: B description",
+      //       "status": "c",
+      //   "blocked": false
+      //     }
+      //     ]
+      //   }
+      // ];
       $scope.loadTree($scope.treeData);
     }, 10);
 
