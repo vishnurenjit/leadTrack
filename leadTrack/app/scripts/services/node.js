@@ -4,7 +4,7 @@ angular.module('sos00App')
   .factory('NodeService', function () {
   	var o = {currentNode : null};
 
-  	
+
   	o.setCurrentNode = function(node) {
   		o.currentNode = node;
   	}
@@ -21,6 +21,7 @@ angular.module('sos00App')
   		var node = new Node();
   		node.set("label", label);
   		node.set("description", description);
+  		node.set("status", "p");
   		return node;
   	}
 
