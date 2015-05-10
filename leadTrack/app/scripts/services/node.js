@@ -17,6 +17,7 @@ angular.module('sos00App')
       node.createdDate = o.currentNode.get("createdDate");
       node.parent = o.currentNode.get("parent");
       node.children = [];
+      node.parse = o.currentNode;
   		return node;
   	}
 
@@ -34,7 +35,7 @@ angular.module('sos00App')
 
   	o.saveNode = function(node, parent, svSuccess, svError) {
   		node.set("createdDate", new Date());
-  		node.set("parent", parent);
+  		node.set("parent", new Node());
 
   		node.save(null, {
 		  success: function(node) {

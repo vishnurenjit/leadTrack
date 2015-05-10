@@ -15,6 +15,7 @@ angular.module('sos00App')
 
   	o.saveBoard = function(board, svSuccess) {
   		board.set("createdDate", new Date());
+  		console.log(board.get("root").get("status"));
   		board.save(null, {
 		  success: function(board) {
 		  	svSuccess(board);

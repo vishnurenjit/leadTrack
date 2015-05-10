@@ -11,10 +11,19 @@ angular.module('sos00App')
   .controller('TreeCtrl', function ($scope, $timeout, NodeService) {
 
     $scope.node = {};
+    $scope.newNode = {};
 
-    $scope.createNode = function(newNode){
+    $scope.createNode = function(){
       $('#nodeModal').modal('hide')
-      console.log(newNode);
+      console.log($scope.newNode);
+      console.log($scope.node);
+      console.log($scope.node.parse);
+
+      var svNode = NodeService.createNode($scope.newNode.title, $scope.newNode.description);
+      NodeService.saveNode(svNode, $scope.node.parse, function(svNode) {
+          console.log(svNode);
+      }, function() {});
+
       $scope.treeData = [
         {
           "title": "Top Level",
@@ -246,6 +255,7 @@ angular.module('sos00App')
               )
       	  .on("click", function(d){
       		// alert("Clicked");
+            console.log(d);
             $scope.node = d;
             $('#optionsModal').modal('show');
             $scope.$apply();
