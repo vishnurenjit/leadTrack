@@ -254,7 +254,7 @@ angular.module('sos00App')
             }
               )
       	  .on("click", function(d){
-      		// alert("Clicked");
+      		// alert("Clicked");            
             console.log(d);
             $scope.node = d;
             $('#optionsModal').modal('show');
