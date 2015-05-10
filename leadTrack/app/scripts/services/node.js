@@ -17,6 +17,7 @@ angular.module('sos00App')
       node.createdDate = o.currentNode.get("createdDate");
       node.parent = o.currentNode.get("parent");
       node.children = [];
+      node.parse = o.currentNode;
   		return node;
   	}
 
